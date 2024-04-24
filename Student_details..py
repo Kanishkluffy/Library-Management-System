@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 print("---------------------LIBRARY MANAGEMENT SYSTEM-----------------------")
 
@@ -121,6 +122,31 @@ def deletebook():
     else:
         print("Entered Book Code doesn't exist")
 
+def displaygraph():
+    x = df2["Book Name"].tolist()
+    y = df2["Available"].tolist()
+
+    plt.bar(x,y)
+    plt.xticks(rotation=90)
+    plt.xlabel("Book Name")
+    plt.ylabel("Available Books")
+    plt.show()
+
+    genre = df2["Genre"].tolist()
+    genre_set = list(set(genre))
+    genre_count = [0 for x in genre_set]
+
+    for x in genre:
+        for j in range(len(genre_set)):
+            if genre_set[j] == x:
+                genre_count[j] += 1
+            
+    plt.bar(genre_set, genre_count)
+    plt.xlabel("Genre")
+    plt.ylabel("Number of Books")
+    plt.show()
+
+
 print("ENTER THE LOGIN DETAILS")
 dup_name="Kanishk"
 dup_pas="Kanishk123"
@@ -132,7 +158,7 @@ if(name == dup_name and pas == dup_pas):
 
 def main_program():
     print("\nWHICH OPERATION YOU NEED TO PERFORM")
-    ch=int(input("Enter the choice\n1.Add Member\n2.Display Member\n3.Delete Member\n4.Modify Member\n5.Add Book\n6.Modify Book\n7.Display Book\n8.Delete Book\n"))
+    ch=int(input("Enter the choice\n1.Add Member\n2.Display Member\n3.Delete Member\n4.Modify Member\n5.Add Book\n6.Modify Book\n7.Display Book\n8.Delete Book\n9.Display Graph\n"))
     if ch==1:
         n=int(input("Enter how many members do you need to add:"))
         for i in range(n):
@@ -201,6 +227,8 @@ def main_program():
             main_program()
         else:
             exit()
+    elif ch==9:
+        displaygraph()
     else:
         print("Enter the valid choice")
 
